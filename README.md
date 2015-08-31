@@ -49,22 +49,22 @@ I created a GitHub with 2 commits, to illustrate the modification:
 
     https://github.com/StefanScott/UrWeb-Crud1-move-foldR/commit/04ca85962a5c95e8144c6e2a29df729d631b6187#diff-74e1ef1a69438025793099ad624ad8bcR63
 
-The minimally modified version gives a kind unification failure:
+The modified version gives a kind unification failure:
 
-    Have con: 
+  Have con: 
 ```
-    xml ([Dyn = (), Body = (), Form = ()]) ([])
-     (map (fn t :: (Type * Type) => t.2) M.cols)
+  xml ([Dyn = (), Body = (), Form = ()]) ([])
+   (map (fn t :: (Type * Type) => t.2) M.cols)
 ```
-    Need con:  
+  Need con:  
+```
+  <UNIF:U408::Type -> Type> <UNIF:U409::Type>
 
-    <UNIF:U408::Type -> Type> <UNIF:U409::Type>
+  Kind unification failure
 
-    Kind unification failure
-
-    Have:  {Type} -> Type
-    Need:  Type -> Type
-
+  Have:  {Type} -> Type
+  Need:  Type -> Type
+```
 This appears to involve the second argument to `@foldR`, which is:
 ```
   [ fn cols => xml form [] (map snd cols) ]
