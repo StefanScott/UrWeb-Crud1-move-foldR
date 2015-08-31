@@ -62,7 +62,7 @@ struct
         </xml> );
     formFields <- @foldR 
       [ colMeta ] 
-      [ fn cols => xml form [] (map snd cols) ]
+      [ fn cols => xml [] [] (map snd cols) ]
       ( fn [nm :: Name] [t ::_] [rest ::_] [[nm] ~ rest] (col : colMeta t) acc => 
         <xml>
           <li> {cdata col.Nam}: {col.Widget [nm]}</li>

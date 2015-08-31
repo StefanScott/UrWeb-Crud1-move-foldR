@@ -1,6 +1,7 @@
 ####Minimal modification to Crud1:
-#####Moving a `@foldR` call before `return` 
+#####Attempting to move a `@foldR` call *before* the `return` 
 #####Gives a kind unification error: Have `Type -> Type`; Need `{Type} -> Type`  
+#####apparently involving 2nd arg: `[ fn cols => xml form [] (map snd cols) ]`
 
 I am attempting make a minimal modification to the Crud1 demo, by moving the call to `@foldR` in `list()` to *before* the `return` statement.
 
