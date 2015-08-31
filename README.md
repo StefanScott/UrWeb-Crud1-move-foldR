@@ -1,8 +1,6 @@
-**Minimal modification to Crud1:**  
-
-**Move a `@foldR` call before `return` - **  
-
-**gives Kind unification error "Have Type -> Type; Need {Type} -> Type"**  
+### Minimal modification to Crud1:
+####Move a `@foldR` call before `return` 
+####Gives Kind unification error "Have Type -> Type; Need {Type} -> Type"  
 
 I am attempting make a minimal modification to the Crud1 demo, by moving the call to `@foldR` in `list()` to *before* the `return` statement.
 
