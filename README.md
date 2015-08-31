@@ -3,7 +3,15 @@
 #####Gives a kind unification error: Have `Type -> Type`; Need `{Type} -> Type`  
 #####apparently involving 2nd arg: `[ fn cols => xml form [] (map snd cols) ]`
 
-I am attempting make a minimal modification to the Crud1 demo, by moving the call to `@foldR` in `list()` to *before* the `return` statement.
+I am attempting make a minimal modification to the Crud1 demo, by moving the call to `@foldR` in `list()` to *before* the `return` statement. 
+
+The modified version now gives a kind unification error, apparently involving the 2nd argument to `@foldr` - `[ fn cols => xml form [] (map snd cols) ]`.
+
+I am trying to figure out how such a minimal modification could result in a compile error.
+
+The "diff" between the code can be seen at this link, also excerpted here below:
+
+https://github.com/StefanScott/UrWeb-Crud1-move-foldR/commit/04ca85962a5c95e8144c6e2a29df729d631b6187#diff-74e1ef1a69438025793099ad624ad8bcR63
 
 BEFORE:
 ```
@@ -48,16 +56,16 @@ I created a GitHub with 2 commits, to illustrate the modification:
 
   - commit 1: the modified Crud1 - Now, in function `list()`, the call to `@foldR` which computes the form fields has been moved to *before* the `return`. This gives following compile error:
 
-    https://github.com/StefanScott/UrWeb-Crud1-move-foldR/commit/04ca85962a5c95e8144c6e2a29df729d631b6187#diff-74e1ef1a69438025793099ad624ad8bcR63
+https://github.com/StefanScott/UrWeb-Crud1-move-foldR/blob/master/ERR.001.crudWidgetTxn1.ur
 
 The modified version gives a kind unification failure:
 
-  Have con: 
+Have con: 
 ```
   xml ([Dyn = (), Body = (), Form = ()]) ([])
    (map (fn t :: (Type * Type) => t.2) M.cols)
 ```
-  Need con:  
+Need con:  
 ```
   <UNIF:U408::Type -> Type> <UNIF:U409::Type>
 
