@@ -60,6 +60,17 @@ struct
               M.cols }
           </tr>
         </xml> );
+    formFields <- @foldR 
+      [ colMeta ] 
+      [ fn cols => xml form [] (map snd cols) ]
+      ( fn [nm :: Name] [t ::_] [rest ::_] [[nm] ~ rest] (col : colMeta t) acc => 
+        <xml>
+          <li> {cdata col.Nam}: {col.Widget [nm]}</li>
+          {useMore acc}
+        </xml> )
+      <xml/>
+      M.fl 
+      M.cols;
       return <xml>
         <table border={1}>
           <tr>
@@ -80,17 +91,7 @@ struct
         <br/><hr/><br/>
 
         <form>
-          { @foldR 
-            [ colMeta ] 
-            [ fn cols => xml form [] (map snd cols) ]
-            ( fn [nm :: Name] [t ::_] [rest ::_] [[nm] ~ rest] (col : colMeta t) acc => 
-              <xml>
-                <li> {cdata col.Nam}: {col.Widget [nm]}</li>
-                {useMore acc}
-              </xml> )
-            <xml/>
-            M.fl 
-            M.cols }
+          { formFields }
           <submit action={create}/>
         </form>
       </xml>
